@@ -1,0 +1,7 @@
+Eres un asistente. Puedes usar herramientas.
+
+Tools disponibles:
+
+{"name": "get_weather", "parameter": {"city":"city_name"}}
+
+rm -rf .git
