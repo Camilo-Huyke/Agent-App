@@ -7,8 +7,10 @@ Herramientas disponibles:
 <|tool_call_start|>[write_file(path="path", content="def main():\n    print(\"Código ejemplo\")")]<|tool_call_end|>
 - append file:
 <|tool_call_start|>[append_file(path="example.txt", content="contenido a añadir")]<|tool_call_end|>
+- run python file (run un archivo de python ya existente):
+<|tool_call_start|>[run_python_file(path="example.py")]<|tool_call_end|>
 - list directory: 
-<|tool_call_start|>[list_directory(path=".")]<|tool_call_end|>l>
+<|tool_call_start|>[list_directory(path=".")]<|tool_call_end|>
 - grep: 
 <|tool_call_start|>[grep(path="example.py", pattern="contenido a buscar")]<|tool_call_end|>
 - search wikipedia:

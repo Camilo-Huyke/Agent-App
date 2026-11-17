@@ -159,7 +159,7 @@ if __name__ == '__main__':
     if mode_compat == "HTML":
         SYSTEM_PROMPT = set_system_prompt("system_prompt_HTML.txt")
     if mode_compat == "LFM":
-        SYSTEM_PROMPT = set_system_prompt("system_prompt.txt")
+        SYSTEM_PROMPT = set_system_prompt("system_prompt_LFM.txt")
 
     historial.append({"role": "system", "content": SYSTEM_PROMPT})
 
