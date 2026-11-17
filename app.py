@@ -1,10 +1,14 @@
 from openai import OpenAI
 import os
-from pathlib import Path
 import re
+from pathlib import Path
+
 import tool_decoder
 import tool_search_wikipedia
 import tool_run_python
+
+from rich.console import Console
+from rich.panel import Panel
 
 client = OpenAI(base_url="http://localhost:1234/v1", api_key="C-137")
 
@@ -38,16 +42,13 @@ def ejecutar_tool(tool: dict) -> str:
     LIMITE_LECTURA = 6000
     MAX_COINCIDENCIAS = 20
 
-
     name = tool["name"]
-
 
     def required_param(*params):
         missed_params = [m for m in params if tool.get(m) is None]
         if missed_params:
             raise ValueError(f"faltan parametros de {name}: {', '.join(missed_params)}")
 
-    
     try:
 
         if name == "write_file":
@@ -65,7 +66,7 @@ def ejecutar_tool(tool: dict) -> str:
                 return "(file empty)"
             if len(contenido) > LIMITE_LECTURA:
                 restante = len(contenido) - LIMITE_LECTURA
-                return contenido + f"\n[... Truncado, faltan: {restante} caracteres]"
+                return contenido[:LIMITE_LECTURA] + f"\n[... Truncado, faltan: {restante} caracteres]"
             return contenido
         
         elif name == "list_directory":
@@ -94,6 +95,7 @@ def ejecutar_tool(tool: dict) -> str:
                         coincidencias.append(f"Linea {n}: {linea.strip()}")
                     if len(coincidencias) >= MAX_COINCIDENCIAS:
                         coincidencias.append("[... se omitio el resto de coincidencias]")
+                        break
             return "\n".join(coincidencias) or "(No se encontraron coincidencias)"
 
         elif name == "search_wikipedia":
@@ -126,6 +128,9 @@ def send_get_mesg():
     texto_completo = ""
 
     for chunk in respuesta:
+
+        if not chunk.choices:
+            continue
 
         texto = chunk.choices[0].delta.content
         try:

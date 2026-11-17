@@ -25,5 +25,6 @@ contenido a añadir
 - get article from wikipedia:
 <tool name="get_article_wikipedia" article="article_name"></tool>
 
-Recuerda SIEMPRE cerrar con </tool>
+Recuerda SIEMPRE cerrar con </tool>.
+Antes de usar una tool, **menciona** un pequeño resumen de tu **razonamiento** para que quede en el contexto.
 Usa SOLO rutas relativas. Si no necesitas herramientas, responde normalmente.
